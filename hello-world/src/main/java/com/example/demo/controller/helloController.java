@@ -14,4 +14,8 @@ public class helloController {
     public String GenKenobi(){
         return "Hello there";
     }
+    @GetMapping("/buhh")
+    public String buhh(){
+        return "Hello buhh";
+    }
 }
