@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: junk-deployment
+  namespace: ari-ochoa
+  labels:
+    app: junk
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: junk
+  template:
+    metadata:
+      labels:
+        app: junk
+    spec:
+      containers:
+        - name: junk
+          image:  toomanycooks/junk:latest
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: junk-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app: junk
+  ports:
+    - port: 5000
+      targetPort: 5000
+      nodePort: 30005
